@@ -1,0 +1,27 @@
+.main{
+    background-color:blanchedalmond;
+    height: 100%;
+}
+
+.footer{
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.btn {
+    /* -webkit-border-radius: 11;
+    -moz-border-radius: 11; */
+    border-top-left-radius: 11px;
+    border-top-right-radius: 25px;
+    color: #ffffff;
+    font-size: 15px;
+    background: #4a8ba3;
+    padding: 5px 15px 5px 15px;
+    text-decoration: none;
+  }
+  
+  .btn:hover {
+    background: #29719e;
+    text-decoration: none;
+  }

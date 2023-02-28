@@ -1,0 +1,49 @@
+.property-input {
+    padding: 5px;
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #a5a5a6;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 0px;
+    box-shadow: 0px 0px 6px rgba(66,66,66,.75);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+}
+
+.key-input {
+    padding: 5px;
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #0221e0;
+    background-color: #ffffff;
+    color: #002ca7;
+    border-style: solid;
+    border-radius: 0px;
+    box-shadow: 0px 0px 6px rgba(66,66,66,.75);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+}
+
+.objTitle{
+    padding: 20px;
+    font-weight: bold;
+}
+
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+    margin:20px;
+    display: flex;
+    gap: 10px;
+}
+
+.float-child-left {
+    width: 50%;
+    padding: 20px;
+    border: 2px solid red;
+}  
+.float-child-right{
+    width: 50%;
+    padding: 20px;
+    border: 2px solid red;
+}  

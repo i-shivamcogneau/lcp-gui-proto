@@ -1,0 +1,124 @@
+html,
+body,
+div#root,
+.app-frame,
+.app-main {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: #009cff;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.sidebar, .app-body {
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar {
+  width: 10rem;
+  min-width: 10rem;
+  max-width: 10rem;
+  background-color: #eee;
+}
+
+.sidebar a {
+  margin: 8px;
+}
+
+.header {
+  background-color: #00ff8c;
+}
+
+.header a {
+  margin: 8px;
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.container {
+  padding: 4px;
+}
+
+.card {
+  margin: 4px;
+  padding: 4px;
+  background-color: #ffffff;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;  
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex {
+  flex: 1 1 auto;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.justify-flex-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
+}
+
+.justify-space-around {
+  justify-content: space-around;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+.justify-baseline {
+  justify-content: baseline;
+}
+
+.align-flex-start {
+  align-items: flex-start;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-flex-end {
+  align-items: flex-end;
+}
+
+.align-baseline {
+  align-items: baseline;
+}
+
+.align-stretch {
+  align-items: stretch;
+}
