@@ -31,7 +31,6 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
         
         setObj((objs)=>{
             objs[objEdit.name] = objEdit;
-            console.log(objs)
             return objs;
         })
         
@@ -62,8 +61,9 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
 
 
             <div className="float-container">
-                <div className="float-child-right">
+                <div className="float-child">
                     {dataName.map((item, index) => (
+                        <div key={index}>
                         <input
                             className='key-input'
                             key={index}
@@ -77,11 +77,12 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
                                 return result;
                             });
                             }}
-                        />
+                        /></div>
                     ))} 
                 </div>  
-                <div className="float-child-left">
+                <div className="float-child">
                     {dataType.map((item, index) => (
+                        <div key={index}>
                         <input
                         className='property-input'
                             key={index}
@@ -95,7 +96,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
                                 return result;
                             });
                             }}
-                        />
+                        /></div>
                     ))}
                 </div>
             </div>

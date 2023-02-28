@@ -37,13 +37,9 @@
     gap: 10px;
 }
 
-.float-child-left {
+.float-child{
     width: 50%;
     padding: 20px;
     border: 2px solid red;
-}  
-.float-child-right{
-    width: 50%;
-    padding: 20px;
-    border: 2px solid red;
+    flex-direction: column;
 }  
