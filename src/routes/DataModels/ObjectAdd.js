@@ -1,8 +1,10 @@
 import React from 'react';
 import './ObjectAdd.css';
 import { useState, useEffect } from 'react';
+import Dropdown from 'react-dropdown';
+import './dropdown.css';
 
-export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
+export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
 
     const [dataName, setDataName] = useState([]);
     const [dataType, setDataType] = useState([]);
@@ -22,13 +24,10 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
         // to edit json obj
         setObjEdit((cureditObj)=> {
             cureditObj.data = arrToobjs;
-            let tmpO = cureditObj;
             return cureditObj;
         })
 
         // save to setObj
-        // already happending how??    
-        
         setObj((objs)=>{
             objs[objEdit.name] = objEdit;
             return objs;
@@ -83,20 +82,16 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit}){
                 <div className="float-child">
                     {dataType.map((item, index) => (
                         <div key={index}>
-                        <input
-                        className='property-input'
-                            key={index}
-                            type="text"
-                            value={dataType[index]}
+                        <Dropdown options={options} 
                             onChange={(e) => {
-                                const val = e.target.value;
+                                const val = e.value;
                                 setDataType((prevArr) => {
                                 const result = [...prevArr];
                                 result[index] = val;
                                 return result;
                             });
-                            }}
-                        /></div>
+                            }}  placeholder="Select an option" />
+                        </div>
                     ))}
                 </div>
             </div>
