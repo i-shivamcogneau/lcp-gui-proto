@@ -7,10 +7,12 @@ export default function Convert (objs){
 
     keys.forEach((key, index) => {
         // console.log(`${key}: ${JSON.stringify(objs[key])}`);
-        let tmpobj ={"$id": key, "type": "object", "properties":{}};
+        let tmpobj ={"$id": key, "type": "object", "properties":{}, "required": []};
 
         objs[key]["data"].forEach(ob =>{ 
             tmpobj["properties"][ob.name] = {"type": ob.dataType}
+            if(ob.required)
+                tmpobj["required"].push(ob.name);
         })
 
         objectsToSend.push(tmpobj)

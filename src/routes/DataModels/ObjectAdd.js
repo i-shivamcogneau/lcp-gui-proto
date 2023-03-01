@@ -8,17 +8,19 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
 
     const [dataName, setDataName] = useState([]);
     const [dataType, setDataType] = useState([]);
+    const [required, setRequired] = useState([]);
 
     function addStuffArr(){
         setDataName((a)=> [...a, ""])
         setDataType((a)=> [...a, ""])
+        setRequired((a)=> [...a, false])
     }
 
     function SaveToEditobj(){
         // from 2 arrays to array of objects
         let arrToobjs = [];
         for(let i in dataName){
-            arrToobjs.push({name:dataName[i], dataType: dataType[i]})
+            arrToobjs.push({name:dataName[i], dataType: dataType[i], required: required[i]})
         }
 
         // to edit json obj
@@ -38,9 +40,11 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
     useEffect(() => {
         let tmpdName = []
         let tmpdType = []
+        let tmpdReq = []
         for(let i in objEdit.data){
             tmpdName.push(objEdit.data[i].name);
             tmpdType.push(objEdit.data[i].dataType);
+            tmpdReq.push(objEdit.data[i].required);
         }
 
         setDataName(tmpdName)
@@ -91,6 +95,25 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                 return result;
                             });
                             }}  placeholder="Select an option" />
+                        </div>
+                    ))}
+                </div>
+                <div className="float-child">
+                    {required.map((item, index) => (
+                        <div key={index}>
+                        <input
+                            className='key-input-required'
+                            key={index}
+                            type="checkbox"
+                            value={required[index]}
+                            onChange={(e) => {
+                                setRequired((prevArr) => {
+                                    const result = [...prevArr];
+                                    result[index] = !result[index];
+                                    return result;
+                                });
+                            }}
+                        />
                         </div>
                     ))}
                 </div>

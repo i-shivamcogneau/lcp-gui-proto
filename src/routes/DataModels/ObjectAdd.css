@@ -43,3 +43,7 @@
     border: 2px solid red;
     flex-direction: column;
 }  
+
+.key-input-required{
+    margin: 8px;
+}
