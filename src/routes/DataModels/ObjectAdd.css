@@ -47,3 +47,8 @@
 .key-input-required{
     margin: 8px;
 }
+
+.blank-space{
+    height: 30px;
+    border: 2px solid rgb(143, 141, 141);
+}

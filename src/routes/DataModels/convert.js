@@ -7,7 +7,7 @@ export default function Convert (objs){
 
     keys.forEach((key, index) => {
         // console.log(`${key}: ${JSON.stringify(objs[key])}`);
-        let tmpobj ={"$id": key, "type": "object", "properties":{}, "required": []};
+        let tmpobj ={"$id": objs[key]["id"] ,"name": key, "type": "object", "properties":{}, "required": []};
 
         objs[key]["data"].forEach(ob =>{ 
             tmpobj["properties"][ob.name] = {"type": ob.dataType}
