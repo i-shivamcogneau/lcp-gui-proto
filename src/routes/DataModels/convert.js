@@ -29,7 +29,9 @@ export default function Convert (objs){
                     tmpobj["properties"][ob.name]["pattern"] = ob["TypeOption"]["formatType"];
                 }
             }
-        })
+        });
+
+        tmpobj["properties"]["lifecycle"] = {"type":"object","properties":{"created":{"type":"number","format":"date-time"},"updated":{"type":"string","format":"date-time"},"deleted":{"type":"string","format":"date-time"}}};
 
         objectsToSend.push(tmpobj)
     });
