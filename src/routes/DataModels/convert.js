@@ -6,33 +6,37 @@ export default function Convert (objs){
     const keys = Object.keys(objs);
 
     keys.forEach((key, index) => {
-        // console.log(`${key}: ${JSON.stringify(objs[key])}`);
-        let tmpobj ={"$id": objs[key]["id"] ,"name": key, "type": "object", "properties":{}, "required": []};
+        let tmpobj ={"$id": objs[key]["id"] ,"name": key,  "verdis_version": "1.0", "type": "object", "properties":[], "required": []};
 
         objs[key]["data"].forEach(ob =>{ 
-            tmpobj["properties"][ob.name] = {"type": ob.dataType}
+            let tempProp = {};
+            tempProp["name"] = ob.name;
+            tempProp["type"] = ob.dataType;
+
             if(ob.required)
                 tmpobj["required"].push(ob.name);
 
             if(ob.dataType === "array"){
-                tmpobj["properties"][ob.name]["items"] = { "type": ob["TypeOption"]["itemType"] };
+                tempProp["items"] = { "type": ob["TypeOption"]["itemType"] };
             }
             if(ob.dataType === "string"){
                 if(ob["TypeOption"]["name"] === "Length"){
-                    tmpobj["properties"][ob.name]["minLength"] = ob["TypeOption"]["minValue"] ;
-                    tmpobj["properties"][ob.name]["maxLength"] = ob["TypeOption"]["maxValue"] ;
+                    tempProp["minLength"] = ob["TypeOption"]["minValue"];
+                    tempProp["maxLength"] = ob["TypeOption"]["maxValue"];
                 }
                 else if(ob["TypeOption"]["name"] === "Pattern-Regex"){
-                    tmpobj["properties"][ob.name]["pattern"] = ob["TypeOption"]["value"];
+                    tempProp["pattern"] = ob["TypeOption"]["value"];
                 }
                 else if(ob["TypeOption"]["name"] === "Format"){
-                    tmpobj["properties"][ob.name]["pattern"] = ob["TypeOption"]["formatType"];
+                    tempProp["format"] = ob["TypeOption"]["formatType"];
                 }
             }
+
+            tmpobj["properties"].push(tempProp);
         });
 
-        tmpobj["properties"]["lifecycle"] = {"type":"object","properties":{"created":{"type":"number","format":"date-time"},"updated":{"type":"string","format":"date-time"},"deleted":{"type":"string","format":"date-time"}}};
-
+        tmpobj["properties"].push({"name":"lifecycle","type":"object","properties":[{"name":"createdAt","type":"string","format":"date-time"},{"name":"updatedAt","type":"string","format":"date-time"},{"name":"deletedAt","type":"string","format":"date-time"}]});
+        
         objectsToSend.push(tmpobj)
     });
 
