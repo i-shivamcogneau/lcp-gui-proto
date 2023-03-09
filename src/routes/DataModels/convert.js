@@ -38,9 +38,20 @@ export default function Convert (objs){
         tmpobj["properties"].push({"name":"lifecycle","type":"object","properties":[{"name":"createdAt","type":"string","format":"date-time"},{"name":"updatedAt","type":"string","format":"date-time"},{"name":"deletedAt","type":"string","format":"date-time"}]});
         
         objectsToSend.push(tmpobj)
+        DownloadJSON(tmpobj);
     });
 
     
     console.log(JSON.stringify(objectsToSend) )
     console.log(objs)
+}
+
+function DownloadJSON(obj){
+    const strobj = JSON.stringify(obj);
+    const element = document.createElement("a");
+    const file = new Blob([strobj], {type: 'application/json'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${obj.name}.json`;
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
 }

@@ -51,7 +51,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
             tmpdName.push(objEdit.data[i].name);
             tmpdType.push(objEdit.data[i].dataType);
             tmpdReq.push(objEdit.data[i].required);
-            tmpdStrOpt.push(objEdit.data[i].StrOption)
+            tmpdStrOpt.push(objEdit.data[i].TypeOption)
         }
 
         setDataName(tmpdName)
@@ -71,7 +71,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                 <span className='objTitle'>Id: {objEdit.id}</span>
             </div>
 
-
+            <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; DataType &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Required &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; TypeOptions</div>
             <div className="float-container">
                 <div className="float-child">
                     {dataName.map((item, index) => (
@@ -95,7 +95,8 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                 <div className="float-child">
                     {dataType.map((item, index) => (
                         <div key={index}>
-                        <Dropdown options={options} 
+                        <Dropdown options={options}
+                            value={dataType[index]} 
                             onChange={(e) => {
                                 const val = e.value;
                                 setDataType((prevArr) => {
@@ -114,14 +115,14 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                             className='key-input-required'
                             key={index}
                             type="checkbox"
-                            value={required[index]}
+                            checked={required[index]}
                             onChange={(e) => {
                                 setRequired((prevArr) => {
                                     const result = [...prevArr];
                                     result[index] = !result[index];
                                     return result;
                                 });
-                            }}
+                            }}  
                         />
                         </div>
                     ))}
@@ -133,7 +134,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                 <div>
                                 <Dropdown 
                                     options={stroptions} 
-                                    value={stroptions[0]}
+                                    value={strArrOption[index]["name"] || stroptions[0]}
                                     onChange={(e) => {
                                         const val = e.value;
                                         setStrArrOption((prevArr) => {
@@ -150,6 +151,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                     return (
                                         <input
                                             type="text"
+                                            value={strArrOption[index]["value"]}
                                             onChange={(e) => {
                                                 const val = e.target.value;
                                                 setStrArrOption((prevArr) => {
@@ -165,6 +167,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                         <>
                                         <input
                                             type="number"
+                                            value={strArrOption[index]["minValue"]}
                                             onChange={(e) => {
                                                 const val = e.target.value;
                                                 setStrArrOption((prevArr) => {
@@ -176,6 +179,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                         />
                                         <input
                                             type="number"
+                                            value={strArrOption[index]["maxValue"]}
                                             onChange={(e) => {
                                                 const val = e.target.value;
                                                 setStrArrOption((prevArr) => {
@@ -191,7 +195,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                     return (
                                         <Dropdown 
                                             options={strFormatoptions} 
-                                            value={strFormatoptions[0]}
+                                            value={strArrOption[index]["formatType"]}
                                             onChange={(e) => {
                                                 const val = e.value;
                                                 setStrArrOption((prevArr) => {
@@ -209,6 +213,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                             ):(dataType[index] === "array" ?(
                             
                                 <Dropdown options={options} 
+                                    value={strArrOption[index]["itemType"]}
                                     onChange={(e) => {
                                         const val = e.value;
                                         setStrArrOption((prevArr) => {

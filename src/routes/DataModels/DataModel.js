@@ -35,7 +35,7 @@ export default function DataModel (){
             <button onClick={()=> setObjEdit(obj[objectsID])} className='btn' key={index}>{objectsID}</button>
           )} 
           <button className='btn' onClick={()=> addToObjectNameFun()}>+</button>
-          <button className='btn-right' onClick={()=> Convert(obj)}>Convert</button>
+          <button className='btn-right' onClick={()=> Convert(obj)}>Convert & Download</button>
         </div>
       </div>
   );
