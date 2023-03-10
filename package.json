@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.12",
+    "@mui/styled-engine": "^5.11.11",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-dropdown": "^1.11.0",

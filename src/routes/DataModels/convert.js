@@ -12,6 +12,8 @@ export default function Convert (objs){
             let tempProp = {};
             tempProp["name"] = ob.name;
             tempProp["type"] = ob.dataType;
+            tempProp["required"] = ob.required;
+            tempProp["autoGen"] = ob.autoGen;
 
             if(ob.required)
                 tmpobj["required"].push(ob.name);

@@ -4,6 +4,7 @@ import ObjectAdd from './ObjectAdd';
 import './DataModel.css';
 import { v4 as uuidv4 } from 'uuid';
 import Convert from './convert';
+import Modal from '@mui/material/Modal';
 
 export default function DataModel (){
   const [objName, setObjName] = useState([]);    // [{"objectname1" : "objid1"}]
@@ -11,18 +12,23 @@ export default function DataModel (){
   const [objEdit, setObjEdit] = useState({});
   const [options, setOptions] = useState(["number", "string", "boolean", "object", "integer", "array"]);
 
+  const [tmpName, setTmpname] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   function addToObjectNameFun(){
-    let tmpname =  "objectname"+(objName.length+1).toString();
     setObjName((objName) => 
-      [...objName, tmpname]
+      [...objName, tmpName]
     )
 
     setObj((obj)=>{
-      obj[tmpname] = {"name": tmpname, "id": uuidv4(), data:[]}
+      obj[tmpName] = {"name": tmpName, "id": uuidv4(), data:[]}
       return obj
     })
 
-    setOptions((a)=> [...a, tmpname])
+    setOptions((a)=> [...a, tmpName]);
+    setTmpname("");
   }
 
   return(
@@ -34,9 +40,30 @@ export default function DataModel (){
           {objName.map((objectsID, index)=>
             <button onClick={()=> setObjEdit(obj[objectsID])} className='btn' key={index}>{objectsID}</button>
           )} 
-          <button className='btn' onClick={()=> addToObjectNameFun()}>+</button>
+          <button className='btn' onClick={handleOpen}>+</button>
           <button className='btn-right' onClick={()=> Convert(obj)}>Convert & Download</button>
         </div>
+
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          className='modaldiv'
+        >
+          <div className='modal-content'>
+          <input
+              type="text"
+              value={tmpName}
+              onChange={(e) => {
+                  const val = e.target.value;
+                  setTmpname(val);
+              }}
+          />
+          <button onClick={()=> {addToObjectNameFun(); handleClose();}}>Add Object</button>
+          </div>
+        </Modal>
+
       </div>
   );
 }

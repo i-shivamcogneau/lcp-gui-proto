@@ -9,6 +9,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
     const [dataName, setDataName] = useState([]);
     const [dataType, setDataType] = useState([]);
     const [required, setRequired] = useState([]);
+    const [autoGen, setAutoGen] = useState([]);
     const [strArrOption, setStrArrOption] = useState([]);
 
     const stroptions = ["none", "Length", "Pattern-Regex", "Format"];
@@ -18,6 +19,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
         setDataName((a)=> [...a, ""])
         setDataType((a)=> [...a, ""])
         setRequired((a)=> [...a, false])
+        setAutoGen((a)=> [...a, false])
         setStrArrOption((a)=>[...a, {"name": "none"}])
     }
 
@@ -25,7 +27,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
         // from 2 arrays to array of objects
         let arrToobjs = [];
         for(let i in dataName){
-            arrToobjs.push({name:dataName[i], dataType: dataType[i], required: required[i], TypeOption: strArrOption[i]})
+            arrToobjs.push({name:dataName[i], dataType: dataType[i], required: required[i], autoGen:autoGen[i],TypeOption: strArrOption[i]})
         }
 
         // to edit json obj
@@ -46,17 +48,20 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
         let tmpdName = []
         let tmpdType = []
         let tmpdReq = []
+        let tmpdAutogen = []
         let tmpdStrOpt = []
         for(let i in objEdit.data){
             tmpdName.push(objEdit.data[i].name);
             tmpdType.push(objEdit.data[i].dataType);
             tmpdReq.push(objEdit.data[i].required);
+            tmpdAutogen.push(objEdit.data[i].autoGen);
             tmpdStrOpt.push(objEdit.data[i].TypeOption)
         }
 
         setDataName(tmpdName)
         setDataType(tmpdType)
         setRequired(tmpdReq)
+        setAutoGen(tmpdReq)
         setStrArrOption(tmpdStrOpt)
 
      }, [objEdit]);
@@ -71,7 +76,7 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                 <span className='objTitle'>Id: {objEdit.id}</span>
             </div>
 
-            <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; DataType &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Required &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; TypeOptions</div>
+            <div>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Name &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; DataType &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Required &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; AutogenUUID &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; TypeOptions</div>
             <div className="float-container">
                 <div className="float-child">
                     {dataName.map((item, index) => (
@@ -118,6 +123,25 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                             checked={required[index]}
                             onChange={(e) => {
                                 setRequired((prevArr) => {
+                                    const result = [...prevArr];
+                                    result[index] = !result[index];
+                                    return result;
+                                });
+                            }}  
+                        />
+                        </div>
+                    ))}
+                </div>
+                <div className="float-child">
+                    {autoGen.map((item, index) => (
+                        <div key={index}>
+                        <input
+                            className='key-input-required'
+                            key={index}
+                            type="checkbox"
+                            checked={autoGen[index]}
+                            onChange={(e) => {
+                                setAutoGen((prevArr) => {
                                     const result = [...prevArr];
                                     result[index] = !result[index];
                                     return result;
