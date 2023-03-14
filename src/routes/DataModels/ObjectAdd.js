@@ -10,10 +10,12 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
     const [dataType, setDataType] = useState([]);
     const [required, setRequired] = useState([]);
     const [autoGen, setAutoGen] = useState([]);
+    const [autoGenType, setAutoGenType] = useState([]);
     const [strArrOption, setStrArrOption] = useState([]);
 
     const stroptions = ["none", "Length", "Pattern-Regex", "Format"];
     const strFormatoptions = ["date-time", "time", "date", "duration", "email", "hostname", "ipv4", "ipv6", "uuid", "uri", "regex"];
+    const autoGenoptions = ["uuid", "unique-number", "date-time"];
 
     function addStuffArr(){
         setDataName((a)=> [...a, ""])
@@ -21,13 +23,14 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
         setRequired((a)=> [...a, false])
         setAutoGen((a)=> [...a, false])
         setStrArrOption((a)=>[...a, {"name": "none"}])
+        setAutoGenType((a)=>[...a, ""])
     }
 
     function SaveToEditobj(){
         // from 2 arrays to array of objects
         let arrToobjs = [];
         for(let i in dataName){
-            arrToobjs.push({name:dataName[i], dataType: dataType[i], required: required[i], autoGen:autoGen[i],TypeOption: strArrOption[i]})
+            arrToobjs.push({name:dataName[i], dataType: dataType[i], required: required[i], autoGen:autoGen[i],TypeOption: strArrOption[i], autoGenType: autoGenType[i]})
         }
 
         // to edit json obj
@@ -50,18 +53,21 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
         let tmpdReq = []
         let tmpdAutogen = []
         let tmpdStrOpt = []
+        let tmpautoGenType = []
         for(let i in objEdit.data){
             tmpdName.push(objEdit.data[i].name);
             tmpdType.push(objEdit.data[i].dataType);
             tmpdReq.push(objEdit.data[i].required);
             tmpdAutogen.push(objEdit.data[i].autoGen);
-            tmpdStrOpt.push(objEdit.data[i].TypeOption)
+            tmpdStrOpt.push(objEdit.data[i].TypeOption);
+            tmpautoGenType.push(objEdit.data[i].autoGenType);
         }
 
         setDataName(tmpdName)
         setDataType(tmpdType)
         setRequired(tmpdReq)
-        setAutoGen(tmpdReq)
+        setAutoGen(tmpdAutogen)
+        setAutoGenType(tmpautoGenType)
         setStrArrOption(tmpdStrOpt)
 
      }, [objEdit]);
@@ -148,6 +154,24 @@ export default function ObjectAdd ({objEdit, setObj, setObjEdit, options}){
                                 });
                             }}  
                         />
+                        {(() => {
+                            if(autoGen[index]){
+                                return(
+                                    <Dropdown options={autoGenoptions}
+                                        value={autoGenType[index]} 
+                                        onChange={(e) => {
+                                            const val = e.value;
+                                            setAutoGenType((prevArr) => {
+                                                const result = [...prevArr];
+                                                result[index] = val;
+                                                return result;
+                                            });
+                                        }}  
+                                        placeholder="Select an option" 
+                                    />
+                                )
+                            }
+                        })()}
                         </div>
                     ))}
                 </div>
