@@ -48,7 +48,7 @@ export default function Convert (objs){
         tmpobj["properties"].push({"name":"lifecycle","type":"object","properties":[{"name":"createdAt","type":"string","format":"date-time","required":true,"autoGen":true},{"name":"updatedAt","type":"string","format":"date-time","required":true,"autoGen":true},{"name":"deletedAt","type":"string","format":"date-time","required":true,"autoGen":true}]});
         
         objectsToSend.push(tmpobj)
-        // DownloadJSON(tmpobj);
+        DownloadJSON(tmpobj);
     });
 
     
