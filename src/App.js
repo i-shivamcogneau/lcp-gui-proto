@@ -8,7 +8,7 @@ import {
 import Home from './routes/Home';
 import './style.css';
 
-import Processes from './routes/Processes';
+import Workflow from './routes/Workflow/Workflows';
 import Config from './routes/Config';
 import DataModel from './routes/DataModels/DataModel';
 
@@ -23,14 +23,14 @@ class App extends Component {
           <div className="flex flex-row app-main">
             <div className="flex-column sidebar container">
               <Link to="/DataModel">DataModel</Link>
-              <Link to="/Processes">Processes</Link>
+              <Link to="/Workflow">Workflow</Link>
               <Link to="/Config">Config</Link>
             </div>
             <div className="app-body flex">
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/DataModel" component={DataModel} />
-                <Route exact path="/Processes" component={Processes} />
+                <Route exact path="/Workflow" component={Workflow} />
                 <Route exact path="/Config" component={Config} />
               </Switch>
             </div>
