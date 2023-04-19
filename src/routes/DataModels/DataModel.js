@@ -4,6 +4,7 @@ import ObjectAdd from './ObjectAdd';
 import './DataModel.css';
 import { v4 as uuidv4 } from 'uuid';
 import Convert from './convert';
+import ConvertObjectnames from './convertObjectNames';
 import Modal from '@mui/material/Modal';
 
 export default function DataModel (){
@@ -41,7 +42,7 @@ export default function DataModel (){
             <button onClick={()=> setObjEdit(obj[objectsID])} className='btn' key={index}>{objectsID}</button>
           )} 
           <button className='btn' onClick={handleOpen}>+</button>
-          <button className='btn-right' onClick={()=> Convert(obj)}>Convert & Download</button>
+          <button className='btn-right' onClick={()=> {Convert(obj); ConvertObjectnames(objName);}}>Convert & Download</button>
         </div>
 
         <Modal

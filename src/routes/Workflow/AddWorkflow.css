@@ -1,15 +1,15 @@
-.main{
+.wfmain{
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.leftside{
+.wfleftside{
     width: 100%;
     flex-direction: column;
 }
 
-.rightside{
+.wfrightside{
     width: 30%;
     border: 1px solid;
 }

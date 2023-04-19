@@ -52,11 +52,11 @@ export default function AddWorkflow ({WorkflowEdit, setWorkflowEdit, setWorkflow
     }
 
     if(Object.keys(WorkflowEdit).length === 0){
-        return(<>Create/Select an Object</>);
+        return(<>Create/Select a Workflow</>);
     }
 
-    return (<div className='main'>
-        <div className='leftside'>
+    return (<div className='wfmain'>
+        <div className='wfleftside'>
             <div className='wfTitle'>
                 <span className='wfTitle'>Name: {WorkflowEdit.name}</span>
                 <br></br>
@@ -84,7 +84,7 @@ export default function AddWorkflow ({WorkflowEdit, setWorkflowEdit, setWorkflow
             </div>
         </div>
 
-        <div className='rightside'>
+        <div className='wfrightside'>
             {(() => {
                 if (comp.compn == "task") {
                 return (
