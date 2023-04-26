@@ -8,6 +8,7 @@
     "@mui/material": "^5.11.12",
     "@mui/styled-engine": "^5.11.11",
     "react": "^16.6.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^16.6.0",
     "react-dropdown": "^1.11.0",
     "react-router-dom": "^4.3.1",

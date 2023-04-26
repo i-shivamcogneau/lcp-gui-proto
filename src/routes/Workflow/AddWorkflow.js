@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './AddWorkflow.css';
 import AddEditTask from './AddeditTask';
 import AddEditTrigger from './AddEditTrigger';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function AddWorkflow ({WorkflowEdit, setWorkflowEdit, setWorkflows }){
     const [WorkFlowTrigger, setWorkFlowTrigger] = useState({});
@@ -55,6 +56,24 @@ export default function AddWorkflow ({WorkflowEdit, setWorkflowEdit, setWorkflow
         return(<>Create/Select a Workflow</>);
     }
 
+    function onDragEnd(result) {
+        if (!result.destination) {
+            return;
+        }
+    
+        const items = Array.from(WorkFlowTask);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+    
+        setWorkFlowTask(items);
+
+        const queueitems = Array.from(WorkFlowQueue);
+        const [queuereorderedItem] = queueitems.splice(result.source.index, 1);
+        queueitems.splice(result.destination.index, 0, queuereorderedItem);
+    
+        setWorkFlowQueue(queueitems);
+    }
+    
     return (<div className='wfmain'>
         <div className='wfleftside'>
             <div className='wfTitle'>
@@ -68,13 +87,25 @@ export default function AddWorkflow ({WorkflowEdit, setWorkflowEdit, setWorkflow
             </div>
 
             <div className='task'>
-            {WorkFlowTask.map((wfTID, index)=>{
-                return(
-                <div key={index} style={{border: '1px solid rgba(0, 0, 0)', cursor: 'pointer'}} onClick={()=> Edittasks("task",index)}>
-                    <div className='wfTitle'>Queue Name: {WorkFlowQueue[index]["name"] || ""}</div>
-                    <div className='wfTitle'>Task Name: {wfTID["name"] || ""}</div> 
-                </div>)
-            })}
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Droppable droppableId="workFlowTask">
+                    {(provided, snapshot) => (
+                        <div ref={provided.innerRef} style={{ backgroundColor: snapshot.isDraggingOver ? '#adadad' : 'grey' }} {...provided.droppableProps}>
+                            {WorkFlowTask.map((wfTID, index) => (
+                                <Draggable draggableId={index.toString()} index={index} key={index}>
+                                    {(provided) => (
+                                        <div key={index} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}  onClick={()=> Edittasks("task",index)}>
+                                            <div className='wfTitle'>Queue Name: {WorkFlowQueue[index]["name"] || ""}</div>
+                                            <div className='wfTitle'>Task Name: {WorkFlowTask[index]["name"] || ""}</div> 
+                                            <hr></hr>
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
             </div>
 
             <div>
