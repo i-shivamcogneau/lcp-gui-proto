@@ -7,9 +7,9 @@ import Convert from './convert';
 import ConvertObjectnames from './convertObjectNames';
 import Modal from '@mui/material/Modal';
 
-export default function DataModel (){
-  const [objName, setObjName] = useState([]);    // [{"objectname1" : "objid1"}]
-  const [obj, setObj] = useState({});         //{"objectname1": {"id":uuid}}
+export default function DataModel ({obj, setObj, objName, setObjName}){
+  // const [objName, setObjName] = useState([]);    // [{"objectname1" : "objid1"}]
+  // const [obj, setObj] = useState({});         //{"objectname1": {"id":uuid}}
   const [objEdit, setObjEdit] = useState({});
   const [options, setOptions] = useState(["number", "string", "boolean", "object", "integer", "array"]);
 

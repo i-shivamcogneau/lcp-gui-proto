@@ -7,9 +7,9 @@ import AddWorkflow from './AddWorkflow';
 
 import ConvertWorkflow from './convertWorkflow';
 
-export default function Workflows (){
-  const [Workflows, setWorkflows] = useState({}); 
-  const [WorkflowsName, setWorkflowsName] = useState([]);
+export default function Workflows ({Workflows, setWorkflows, WorkflowsName, setWorkflowsName}){
+  // const [Workflows, setWorkflows] = useState({});  
+  // const [WorkflowsName, setWorkflowsName] = useState([]);
   const [WorkflowEdit, setWorkflowEdit] = useState({});
 
   const [tmpName, setTmpname] = React.useState("");
